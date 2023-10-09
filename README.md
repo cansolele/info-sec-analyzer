@@ -1,1 +1,1 @@
-# info-sec-analyzer
+# InfoSec Analyzer
