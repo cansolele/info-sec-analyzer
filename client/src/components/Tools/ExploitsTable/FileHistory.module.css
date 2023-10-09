@@ -1,0 +1,29 @@
+.file_history {
+  width: 300px;
+  overflow: auto;
+  position: absolute;
+  right: 20px;
+  padding-left: 25px;
+  top: 80px;
+  bottom: 58px;
+  border-radius: 10px;
+}
+
+.file_history::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
+
+.file_history::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+.file_history::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.file_history::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

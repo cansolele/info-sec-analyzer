@@ -1,0 +1,19 @@
+.aside {
+  position: absolute;
+  left: 0;
+  top: 60px;
+  bottom: 0;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+}
+.aside::-webkit-scrollbar {
+  width: 0;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}

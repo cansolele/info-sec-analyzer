@@ -1,0 +1,49 @@
+import React, { useState, useEffect } from "react";
+import { Box, Typography, Link } from "@mui/material";
+import config from "../../../config";
+import style from "./FileHistory.module.css";
+import axios from "axios";
+
+const FileHistory = React.memo(({ currentLanguage }) => {
+  const [fileHistory, setFileHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchFileHistory = async () => {
+      try {
+        const response = await axios.get(`${config.apiURL}/file-history`);
+        if (response.status === 200) {
+          const data = response.data;
+          setFileHistory(data.reverse());
+        } else {
+          console.error("Failed to fetch file history");
+        }
+      } catch (error) {
+        console.error("Error fetching file history:", error);
+      }
+    };
+
+    fetchFileHistory();
+  }, []);
+
+  return (
+    <Box sx={{ bgcolor: "background.paper" }} className={style.file_history}>
+      <Typography sx={{ textAlign: "center", mt: 1 }} variant="h5">
+        {currentLanguage === "ENG" ? "Report history" : "История отчётов"}
+      </Typography>
+      <ul>
+        {fileHistory.map((fileInfo, index) => (
+          <li key={index}>
+            <Link
+              href={`${config.apiURL}/download/${fileInfo.timestamp}`}
+              download
+            >
+              {fileInfo.filename}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Box>
+  );
+});
+
+export default FileHistory;
