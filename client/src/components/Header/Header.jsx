@@ -23,6 +23,7 @@ const Header = ({ mode, setMode, currentLanguage, setCurrentLanguage }) => {
   const titles = {
     "/": "InfoSec Analyzer",
     "/exploits-table": "Exploits table",
+    "/vulnerability-analyzer": "Vulnerability analyzer",
   };
   const toggleColorMode = () => {
     mode === "dark" ? setMode("light") : setMode("dark");

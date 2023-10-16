@@ -2,11 +2,13 @@ from flask import Flask, request, Response
 from flask_cors import CORS as flask_cors
 from tool_descriptions import tool_descriptions
 from exploits_table import exploits_table_routes
+from vulnerability_analyzer import vulnerability_analyzer_routes
 
 app = Flask("cis-server")
 flask_cors(app)
 
 app.register_blueprint(exploits_table_routes)
+app.register_blueprint(vulnerability_analyzer_routes)
 
 
 @app.route("/about", methods=["POST"])

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Box, IconButton, Typography } from "@mui/material";
-import rc_icon from "./icons/rc_icon.png";
+import exploit_icon from "./icons/exploit_icon.png";
+import vulnerability_icon from "./icons/vulnerability_icon.png";
 import style from "./Aside.module.css";
 
 const Aside = () => {
@@ -40,13 +41,32 @@ const Aside = () => {
         }}
         onClick={() => handleButtonClick("/exploits-table")}
       >
-        <img className={style.icon} src={rc_icon} alt="rc icon" />
+        <img className={style.icon} src={exploit_icon} alt="exploits icon" />
       </IconButton>
       <Typography
         variant="subtitle1"
-        sx={{ textAlign: "center", color: "text.title" }}
+        sx={{ textAlign: "center", color: "text.title", fontSize: 12 }}
       >
         Exploits table
+      </Typography>
+      <IconButton
+        sx={{
+          ...styleButton("/vulnerability-analyzer"),
+          marginTop: 0,
+        }}
+        onClick={() => handleButtonClick("/vulnerability-analyzer")}
+      >
+        <img
+          className={style.icon}
+          src={vulnerability_icon}
+          alt="vulnerability icon"
+        />
+      </IconButton>
+      <Typography
+        variant="subtitle1"
+        sx={{ textAlign: "center", color: "text.title", fontSize: 12 }}
+      >
+        Vulnerability analyzer
       </Typography>
     </Box>
   );

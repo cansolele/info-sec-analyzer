@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import Theme from "./Theme";
 import MainPage from "./components/MainPage/MainPage";
 import ExploitsTable from "./components/Tools/ExploitsTable/ExploitsTable";
+import VulnerabilityAnalyzer from "./components/Tools/VulnerabilityAnalyzer/VulnerabilityAnalyzer";
 
 import "./App.css";
 
@@ -43,6 +44,12 @@ const App = () => {
           <Route
             path="/exploits-table"
             element={<ExploitsTable currentLanguage={currentLanguage} />}
+          />
+          <Route
+            path="/vulnerability-analyzer"
+            element={
+              <VulnerabilityAnalyzer currentLanguage={currentLanguage} />
+            }
           />
         </Routes>
         <Footer currentLanguage={currentLanguage} />
