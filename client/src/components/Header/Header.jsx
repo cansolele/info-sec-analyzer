@@ -56,7 +56,7 @@ const Header = ({ mode, setMode, currentLanguage, setCurrentLanguage }) => {
 
   return (
     <Box sx={{ bgcolor: "primary.main" }} className={style.header}>
-      <Typography variant="h3" sx={{ color: "text.title" }}>
+      <Typography sx={{ color: "text.title", fontSize: "30px" }}>
         {titles[location.pathname]}
       </Typography>
       <Stack
@@ -65,19 +65,19 @@ const Header = ({ mode, setMode, currentLanguage, setCurrentLanguage }) => {
         sx={{ position: "absolute", right: 0 }}
       >
         <Button onClick={toggleLanguage}>
-          <Typography sx={{ color: "text.title", fontSize: "30px" }}>
+          <Typography sx={{ color: "text.title", fontSize: "20px" }}>
             {currentLanguage}
           </Typography>
         </Button>
-        <IconButton onClick={toggleColorMode} color="inherit">
+        <IconButton size="20px" onClick={toggleColorMode} color="inherit">
           {mode === "dark" ? (
-            <Brightness7Icon fontSize="large" />
+            <Brightness7Icon fontSize="20px" />
           ) : (
-            <Brightness4Icon fontSize="large" htmlColor="white" />
+            <Brightness4Icon fontSize="20px" htmlColor="white" />
           )}
         </IconButton>
-        <IconButton size="large" onClick={handleSubmit} color="inherit">
-          <QuestionMarkIcon fontSize="large" htmlColor="white" />
+        <IconButton size="20px" onClick={handleSubmit} color="inherit">
+          <QuestionMarkIcon fontSize="20px" htmlColor="white" />
         </IconButton>
       </Stack>
 

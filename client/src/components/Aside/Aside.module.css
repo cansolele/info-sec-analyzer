@@ -1,9 +1,9 @@
 .aside {
   position: absolute;
   left: 0;
-  top: 60px;
+  top: 35px;
   bottom: 0;
-  width: 80px;
+  width: 70px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

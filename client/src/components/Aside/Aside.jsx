@@ -20,8 +20,8 @@ const Aside = () => {
   };
 
   const styleButton = (path) => ({
-    width: "70px",
-    height: "70px",
+    width: "60px",
+    height: "60px",
     padding: 0,
     borderRadius: 0,
     margin: "10px auto",
@@ -45,7 +45,7 @@ const Aside = () => {
       </IconButton>
       <Typography
         variant="subtitle1"
-        sx={{ textAlign: "center", color: "text.title", fontSize: 12 }}
+        sx={{ textAlign: "center", color: "text.title", fontSize: 11 }}
       >
         Exploits table
       </Typography>
@@ -64,7 +64,7 @@ const Aside = () => {
       </IconButton>
       <Typography
         variant="subtitle1"
-        sx={{ textAlign: "center", color: "text.title", fontSize: 12 }}
+        sx={{ textAlign: "center", color: "text.title", fontSize: 11 }}
       >
         Vulnerability analyzer
       </Typography>
