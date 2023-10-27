@@ -1,11 +1,17 @@
 from flask import Flask, request, Response
-from flask_cors import CORS as flask_cors
+from flask_cors import CORS
 from tool_descriptions import tool_descriptions
 from exploits_table import exploits_table_routes
 from vulnerability_analyzer import vulnerability_analyzer_routes
+from flask_socketio import SocketIO
 
 app = Flask("cis-server")
-flask_cors(app)
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+from flask_cors import CORS
+
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 app.register_blueprint(exploits_table_routes)
 app.register_blueprint(vulnerability_analyzer_routes)
@@ -20,4 +26,4 @@ def about():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    socketio.run(app, host="0.0.0.0", port=5000)
