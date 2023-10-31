@@ -9,7 +9,8 @@ import Theme from "./Theme";
 import MainPage from "./components/MainPage/MainPage";
 import ExploitsTable from "./components/Tools/ExploitsTable/ExploitsTable";
 import VulnerabilityAnalyzer from "./components/Tools/VulnerabilityAnalyzer/VulnerabilityAnalyzer";
-
+import { io } from "socket.io-client";
+import config from "./config";
 import "./App.css";
 
 const App = () => {
@@ -19,6 +20,16 @@ const App = () => {
   const [currentLanguage, setCurrentLanguage] = useState(
     () => localStorage.getItem("language") || "ENG"
   );
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io.connect(config.apiURL);
+    setSocket(newSocket);
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("mode", mode);
@@ -43,7 +54,12 @@ const App = () => {
           <Route path="/" element={<MainPage />} />
           <Route
             path="/exploits-table"
-            element={<ExploitsTable currentLanguage={currentLanguage} />}
+            element={
+              <ExploitsTable
+                socket={socket}
+                currentLanguage={currentLanguage}
+              />
+            }
           />
           <Route
             path="/vulnerability-analyzer"
