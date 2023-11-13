@@ -1,57 +1,53 @@
 import { createTheme } from "@mui/material/styles";
 
+const commonColors = {
+  textTitle: "#FFF",
+  greenButton: {
+    main: "green",
+    hover: "darkgreen",
+  },
+};
+
 const themeOptions = {
-  palette: {
-    primary: {
-      main: "#3f51b5",
-    },
-    secondary: {
-      main: "#f50057",
-    },
-    background: {
+  primary: {
+    light: "#3f51b5",
+    dark: "#366096",
+  },
+  secondary: {
+    light: "#f50057",
+    dark: "#24344d",
+  },
+  background: {
+    light: {
       default: "#fafafa",
-      paper: "#fff",
+      paper: "#ebebeb",
     },
-    text: {
-      title: "#FFF",
+    dark: {
+      default: "#192231",
+      paper: "#24344d",
     },
   },
 };
 
 const createCustomTheme = (mode) => {
-  const primaryMain = mode === "dark" ? "#366096" : "#3f51b5";
-  const secondaryMain = mode === "dark" ? "#24344d" : "#f50057";
-  const backgroundDefault = mode === "dark" ? "#192231" : "#fafafa";
-  const backgroundPaper = mode === "dark" ? "#24344d" : "#ebebeb";
-  const textTitle = "#FFF";
+  const paletteMode = mode === "dark" ? "dark" : "light";
 
-  const palette = {
-    ...themeOptions.palette,
-    mode,
-    primary: {
-      ...themeOptions.palette.primary,
-      main: primaryMain,
+  return createTheme({
+    palette: {
+      mode: paletteMode,
+      primary: {
+        main: themeOptions.primary[paletteMode],
+      },
+      secondary: {
+        main: themeOptions.secondary[paletteMode],
+      },
+      background: themeOptions.background[paletteMode],
+      text: {
+        title: commonColors.textTitle,
+      },
+      greenButton: commonColors.greenButton,
     },
-    secondary: {
-      ...themeOptions.palette.secondary,
-      main: secondaryMain,
-    },
-    background: {
-      ...themeOptions.palette.background,
-      default: backgroundDefault,
-      paper: backgroundPaper,
-    },
-    text: {
-      ...themeOptions.palette.text,
-      title: textTitle,
-    },
-    greenButton: {
-      main: "green",
-      hover: "darkgreen",
-    },
-  };
-
-  return createTheme({ palette });
+  });
 };
 
 const Theme = ({ mode }) => createCustomTheme(mode);

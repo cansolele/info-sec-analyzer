@@ -15,49 +15,45 @@ import { useLocation, useNavigate } from "react-router-dom";
 import style from "./Header.module.css";
 import config from "../../config";
 
+const titles = {
+  "/": "InfoSec Analyzer",
+  "/exploits-table": "Exploits table",
+  "/vulnerability-analyzer": "Vulnerability analyzer",
+};
+
 const Header = ({ mode, setMode, currentLanguage, setCurrentLanguage }) => {
   const [modalWindow, setModalWindow] = useState(false);
   const [modalDescription, setModalDescription] = useState("");
   const location = useLocation();
-  const navigate = useNavigate();
-  const titles = {
-    "/": "InfoSec Analyzer",
-    "/exploits-table": "Exploits table",
-    "/vulnerability-analyzer": "Vulnerability analyzer",
-  };
-  const toggleColorMode = () => {
-    mode === "dark" ? setMode("light") : setMode("dark");
-  };
-  const toggleLanguage = () => {
-    currentLanguage === "ENG"
-      ? setCurrentLanguage("RU")
-      : setCurrentLanguage("ENG");
-  };
-  const handleSubmit = async () => {
-    const url = `${config.apiURL}/about`;
 
-    const payload = {
-      tool: location.pathname,
-    };
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    };
-
-    const response = await fetch(url, options);
-    const data = await response.text();
-    setModalDescription(data);
-    setModalWindow(true);
-  };
+  const toggleColorMode = () => setMode(mode === "dark" ? "light" : "dark");
   const handleClose = () => setModalWindow(false);
+  const toggleLanguage = () =>
+    setCurrentLanguage(currentLanguage === "ENG" ? "RU" : "ENG");
+
+  const handleSubmit = async () => {
+    try {
+      const url = `${config.apiURL}/about`;
+      const payload = { tool: location.pathname };
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      };
+
+      const response = await fetch(url, options);
+      const data = await response.text();
+      setModalDescription(data);
+      setModalWindow(true);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   return (
     <Box sx={{ bgcolor: "primary.main" }} className={style.header}>
       <Typography sx={{ color: "text.title", fontSize: "30px" }}>
-        {titles[location.pathname]}
+        {titles[location.pathname] || "Page Title"}
       </Typography>
       <Stack
         direction="row"

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box, CssBaseline } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
+
 import Aside from "./components/Aside/Aside";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -9,6 +10,7 @@ import Theme from "./Theme";
 import useSocket from "./hooks/useSocket";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import routes from "./routes";
+
 import "./App.css";
 
 const App = () => {
@@ -17,7 +19,20 @@ const App = () => {
     "language",
     "ENG"
   );
+
   const socket = useSocket();
+
+  const renderRoutes = () =>
+    routes.map((route) => (
+      <Route
+        key={route.path}
+        path={route.path}
+        element={React.createElement(route.component, {
+          socket,
+          currentLanguage,
+        })}
+      />
+    ));
 
   return (
     <ThemeProvider theme={Theme({ mode })}>
@@ -30,18 +45,7 @@ const App = () => {
           setCurrentLanguage={setCurrentLanguage}
         />
         <Aside />
-        <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={React.createElement(route.component, {
-                socket,
-                currentLanguage,
-              })}
-            />
-          ))}
-        </Routes>
+        <Routes>{renderRoutes()}</Routes>
         <Footer currentLanguage={currentLanguage} />
       </Box>
     </ThemeProvider>

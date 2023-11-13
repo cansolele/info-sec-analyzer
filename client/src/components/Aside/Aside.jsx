@@ -5,6 +5,15 @@ import exploit_icon from "./icons/exploit_icon.png";
 import vulnerability_icon from "./icons/vulnerability_icon.png";
 import style from "./Aside.module.css";
 
+const buttons = [
+  { id: "/exploits-table", icon: exploit_icon, label: "Exploits table" },
+  {
+    id: "/vulnerability-analyzer",
+    icon: vulnerability_icon,
+    label: "Vulnerability analyzer",
+  },
+];
+
 const Aside = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,40 +43,22 @@ const Aside = () => {
 
   return (
     <Box sx={{ bgcolor: "primary.main" }} className={style.aside}>
-      <IconButton
-        sx={{
-          ...styleButton("/exploits-table"),
-          marginTop: 0,
-        }}
-        onClick={() => handleButtonClick("/exploits-table")}
-      >
-        <img className={style.icon} src={exploit_icon} alt="exploits icon" />
-      </IconButton>
-      <Typography
-        variant="subtitle1"
-        sx={{ textAlign: "center", color: "text.title", fontSize: 11 }}
-      >
-        Exploits table
-      </Typography>
-      <IconButton
-        sx={{
-          ...styleButton("/vulnerability-analyzer"),
-          marginTop: 0,
-        }}
-        onClick={() => handleButtonClick("/vulnerability-analyzer")}
-      >
-        <img
-          className={style.icon}
-          src={vulnerability_icon}
-          alt="vulnerability icon"
-        />
-      </IconButton>
-      <Typography
-        variant="subtitle1"
-        sx={{ textAlign: "center", color: "text.title", fontSize: 11 }}
-      >
-        Vulnerability analyzer
-      </Typography>
+      {buttons.map(({ id, icon, label }) => (
+        <React.Fragment key={id}>
+          <IconButton
+            sx={{ ...styleButton(id), marginTop: 0 }}
+            onClick={() => handleButtonClick(id)}
+          >
+            <img className={style.icon} src={icon} alt={`${label} icon`} />
+          </IconButton>
+          <Typography
+            variant="subtitle1"
+            sx={{ textAlign: "center", color: "text.title", fontSize: 11 }}
+          >
+            {label}
+          </Typography>
+        </React.Fragment>
+      ))}
     </Box>
   );
 };
