@@ -12,8 +12,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-app.register_blueprint(exploits_table_routes)
-app.register_blueprint(vulnerability_analyzer_routes)
+app.register_blueprint(exploits_table_routes, url_prefix="/exploits")
+app.register_blueprint(vulnerability_analyzer_routes, url_prefix="/vulnerabilities")
 
 
 @app.route("/about", methods=["POST"])
