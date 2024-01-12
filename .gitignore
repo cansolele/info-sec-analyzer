@@ -2,3 +2,4 @@ client/node_modules
 server/__pycache__
 server/Exploits-table
 server/Vulnerability-analyzer
+server/Updates-analyzer

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Box, IconButton, Typography } from "@mui/material";
 import exploit_icon from "./icons/exploit_icon.png";
 import vulnerability_icon from "./icons/vulnerability_icon.png";
+import updates_icon from "./icons/updates_icon.png";
 import style from "./Aside.module.css";
 
 const buttons = [
@@ -12,6 +13,7 @@ const buttons = [
     icon: vulnerability_icon,
     label: "Vulnerability analyzer",
   },
+  { id: "/updates-analyzer", icon: updates_icon, label: "Updates analyzer" },
 ];
 
 const Aside = () => {

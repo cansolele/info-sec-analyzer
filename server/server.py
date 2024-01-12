@@ -3,6 +3,7 @@ from flask_cors import CORS
 from tool_descriptions import tool_descriptions
 from exploits_table import exploits_table_routes
 from vulnerability_analyzer import vulnerability_analyzer_routes
+from updates_analyzer import updates_analyzer_routes
 from flask_socketio import SocketIO
 
 app = Flask("cis-server")
@@ -14,6 +15,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(exploits_table_routes, url_prefix="/exploits")
 app.register_blueprint(vulnerability_analyzer_routes, url_prefix="/vulnerabilities")
+app.register_blueprint(updates_analyzer_routes, url_prefix="/updates")
 
 
 @app.route("/about", methods=["POST"])

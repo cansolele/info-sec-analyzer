@@ -1,0 +1,8 @@
+.updates_analyzer {
+  margin-left: 100px;
+  margin-top: 20px;
+  overflow: auto;
+  max-height: 87.7vh;
+  display: flex;
+  flex-direction: row;
+}

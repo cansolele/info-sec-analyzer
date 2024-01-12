@@ -19,6 +19,7 @@ const titles = {
   "/": "InfoSec Analyzer",
   "/exploits-table": "Exploits table",
   "/vulnerability-analyzer": "Vulnerability analyzer",
+  "/updates-analyzer": "Updates analyzer",
 };
 
 const Header = ({ mode, setMode, currentLanguage, setCurrentLanguage }) => {
