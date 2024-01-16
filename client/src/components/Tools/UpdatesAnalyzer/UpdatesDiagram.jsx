@@ -1,6 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { Box } from "@mui/material";
+import { toPng } from "html-to-image";
+import DownloadIcon from "@mui/icons-material/Download";
+import { IconButton } from "@mui/material";
 
 const riskColors = {
   Critical: "#87171a",
@@ -11,12 +14,46 @@ const riskColors = {
 };
 
 const UpdatesDiagram = ({ updatesData, currentLanguage, percent }) => {
+  const boxRef = useRef(null);
   const riskLevels = {
     Critical: currentLanguage === "ENG" ? "Critical" : "Критические",
     High: currentLanguage === "ENG" ? "High" : "Высокие",
     Medium: currentLanguage === "ENG" ? "Medium" : "Средние",
     Low: currentLanguage === "ENG" ? "Low" : "Низкие",
     Unavailable: currentLanguage === "ENG" ? "Unavailable" : "Недоступные",
+  };
+  const downloadPng = () => {
+    const boxElement = boxRef.current;
+    const originalBackgroundColor = boxElement.style.backgroundColor;
+    boxElement.style.backgroundColor = "white";
+    const textElements = boxElement.querySelectorAll(
+      " g.MuiChartsLegend-series > text"
+    );
+    const originalStyles = [];
+    textElements.forEach((textElement, index) => {
+      originalStyles[index] = textElement.getAttribute("style");
+      textElement.style.fill = "black";
+    });
+    toPng(boxElement)
+      .then((dataUrl) => {
+        boxElement.style.backgroundColor = originalBackgroundColor;
+        textElements.forEach((textElement, index) => {
+          textElement.setAttribute("style", originalStyles[index]);
+        });
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = "updates diagram.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((err) => {
+        console.error("Could not download PNG", err);
+        boxElement.style.backgroundColor = originalBackgroundColor;
+        textElements.forEach((textElement, index) => {
+          textElement.setAttribute("style", originalStyles[index]);
+        });
+      });
   };
 
   const chartData = useMemo(() => {
@@ -32,6 +69,8 @@ const UpdatesDiagram = ({ updatesData, currentLanguage, percent }) => {
 
   return (
     <Box
+      ref={boxRef}
+      position="relative"
       sx={{
         width: "1000px",
         height: "500px",
@@ -42,6 +81,7 @@ const UpdatesDiagram = ({ updatesData, currentLanguage, percent }) => {
           {
             arcLabel: (item) => `${item.value}`,
             arcLabelMinAngle: 15,
+            innerRadius: 100,
             paddingAngle: 1,
             cornerRadius: 5,
             data: chartData,
@@ -54,6 +94,16 @@ const UpdatesDiagram = ({ updatesData, currentLanguage, percent }) => {
           },
         }}
       />
+      <IconButton
+        onClick={downloadPng}
+        sx={{
+          position: "absolute",
+          top: -40,
+          left: "45%",
+        }}
+      >
+        <DownloadIcon />
+      </IconButton>
     </Box>
   );
 };
