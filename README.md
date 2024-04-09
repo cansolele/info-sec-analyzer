@@ -75,13 +75,13 @@ cd info-sec-analyzer/client
 npm install
 ```
 
-3. **Edit the configuration file (if server is on a different host)::**
+3. **Edit the configuration file ::**
 
-_If your server is running on a different machine than the client, open `info-sec-analyzer/client/src/config.js` and modify the `apiURL` value to match the address of your server._ For example:
+_Open `info-sec-analyzer/client/src/config.js` and modify the `apiURL` value to match the address of your server._ For example:
 
 ```javascript
 const config = Object.freeze({
-  apiURL: "http://127.0.0.1:5000", // Replace with your server address
+  apiURL: "http://192.168.1.1:5000", // Replace with your server address
 });
 export default config;
 ```
