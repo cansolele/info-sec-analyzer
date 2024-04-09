@@ -23,6 +23,7 @@ git clone https://github.com/cansolele/info-sec-analyzer
 ```bash
 cd info-sec-analyzer/server
 ```
+
 3. **Create and activate a virtual environment:**
 
 ```bash
@@ -33,7 +34,7 @@ source venv/bin/activate # For bash/zsh shells
 4. **Install server dependencies:**
 
 ```bash
-pip install Flask flask-socketio gunicorn openpyxl requests python-dateutil flask_cors
+pip install -r requirements.txt
 ```
 
 5. **Install required system packages:**

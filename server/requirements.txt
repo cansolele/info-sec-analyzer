@@ -1,0 +1,7 @@
+Flask 
+flask-socketio 
+gunicorn 
+openpyxl 
+requests 
+python-dateutil 
+flask_cors
