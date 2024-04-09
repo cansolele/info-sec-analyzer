@@ -23,33 +23,39 @@ git clone https://github.com/cansolele/info-sec-analyzer
 ```bash
 cd info-sec-analyzer/server
 ```
+3. **Create and activate a virtual environment:**
 
-3. **Install server dependencies:**
+```bash
+python3 -m venv venv # You can replace "venv" with your preferred environment name
+source venv/bin/activate # For bash/zsh shells
+```
+
+4. **Install server dependencies:**
 
 ```bash
 pip install Flask flask-socketio gunicorn openpyxl requests python-dateutil flask_cors
 ```
 
-4. **Install required system packages:**
+5. **Install required system packages:**
 
 ```bash
 sudo apt install libxml-xpath-perl pdfgrep
 ```
 
-5. **Install and configure exploitdb:**
+6. **Install and configure exploitdb:**
 
 ```bash
 sudo git clone https://gitlab.com/exploit-database/exploitdb.git /opt/exploitdb
 sudo ln -sf /opt/exploitdb/searchsploit /usr/local/bin/searchsploit
 ```
 
-6. **Update the searchsploit database:**
+7. **Update the searchsploit database:**
 
 ```bash
 searchsploit -u
 ```
 
-7. **Run the server:**
+8. **Run the server:**
 
 ```bash
 python3 server.py
